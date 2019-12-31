@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_1"
+    app:startDestination="@id/fragment3">
+
+    <activity
+        android:id="@+id/activity2"
+        android:name="com.example.testapplication.Activity2"
+        android:label="activity_2"
+        tools:layout="@layout/activity_2" />
+    <fragment
+        android:id="@+id/fragment1"
+        android:name="com.example.testapplication.Fragment1"
+        android:label="fragment_1"
+        tools:layout="@layout/fragment_1" />
+    <fragment
+        android:id="@+id/fragment2"
+        android:name="com.example.testapplication.Fragment2"
+        android:label="fragment_2"
+        tools:layout="@layout/fragment_2" >
+        <argument
+            android:name="test"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment3"
+        android:name="com.example.testapplication.Fragment3"
+        android:label="fragment_3"
+        tools:layout="@layout/fragment_3" >
+        <action
+            android:id="@+id/action_fragment3_to_activity2"
+            app:destination="@id/activity2" />
+        <action
+            android:id="@+id/action_fragment3_to_fragment1"
+            app:destination="@id/fragment1" />
+        <action
+            android:id="@+id/action_fragment3_to_fragment2"
+            app:destination="@id/fragment2" />
+        <action
+            android:id="@+id/action_fragment3_to_fragment4"
+            app:destination="@id/fragment4" />
+        <action
+            android:id="@+id/action_fragment3_to_fragment5"
+            app:destination="@id/fragment5" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment4"
+        android:name="com.example.testapplication.Fragment4"
+        android:label="fragment_4"
+        tools:layout="@layout/fragment_4" />
+    <fragment
+        android:id="@+id/fragment5"
+        android:name="com.example.testapplication.Fragment5"
+        android:label="fragment_5"
+        tools:layout="@layout/fragment_5" />
+</navigation>

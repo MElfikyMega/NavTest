@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Transition
+        android:id="@+id/startToEndTransition"
         app:constraintSetEnd="@id/end"
         app:constraintSetStart="@+id/start"
-        app:autoTransition="animateToEnd"
         app:duration="2000">
         <KeyFrameSet >
             <KeyAttribute

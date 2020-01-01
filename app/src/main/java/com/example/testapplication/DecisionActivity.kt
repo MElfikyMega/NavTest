@@ -1,11 +1,15 @@
 package com.example.testapplication
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.motion.widget.TransitionAdapter
+import androidx.core.content.edit
+import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.splash.*
+
+const val isFirstTimeKey = "isFirstTime"
+const val isFirstTimeDefault = true
 
 class DecisionActivity : AppCompatActivity() {
 
@@ -13,21 +17,27 @@ class DecisionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash)
 
-        rootMl.setTransitionListener(object : MotionLayout.TransitionListener {
-            override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
-            }
+        val isFirstTime = sharedPreferences.getBoolean(isFirstTimeKey, isFirstTimeDefault)
 
-            override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
-            }
+        if (isFirstTime) {
+            // Show animation and onBoarding
+            rootMl.transitionToEnd()
 
-            override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
-            }
+            rootMl.setTransitionListener(object : TransitionAdapter() {
+                override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
+                    sharedPreferences.edit {
+                        putBoolean(isFirstTimeKey, false)
+                    }
+                    MainActivity.start(this@DecisionActivity)
+                    finish()
+                }
+            })
 
-            override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
-                startActivity(Intent(this@DecisionActivity, MainActivity::class.java))
-                finish()
-            }
-        })
+        } else {
+            MainActivity.start(this)
+            finish()
+        }
     }
 }

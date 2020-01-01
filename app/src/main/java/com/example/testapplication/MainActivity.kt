@@ -1,20 +1,29 @@
 package com.example.testapplication
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.example.testapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        fun start(context: Context) {
+            context.startActivity(Intent(context, MainActivity::class.java))
+        }
+    }
+
     private val topLevelDestinations =
-        setOf(R.id.fragment1, R.id.fragment2, R.id.fragment3, R.id.fragment4)
+        setOf(R.id.fragment1, R.id.fragment2, R.id.fragment3, R.id.fragment4, R.id.loginFragment)
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
@@ -41,17 +50,33 @@ class MainActivity : AppCompatActivity() {
             }
 
             navController.addOnDestinationChangedListener { _, destination, _ ->
-                if (topLevelDestinations.contains(destination.id)) {
-                    rootDl.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-                    fab.visibility = View.VISIBLE
-                    bottomNav.visibility = View.VISIBLE
-                } else {
-                    rootDl.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-                    fab.visibility = View.GONE
-                    bottomNav.visibility = View.GONE
+                // Log.d("xxxxxxxxxxxx", destination.label.toString())
+                // Log.d("xxxxxxxxxxxx", destination.parent?.label.toString())
+                when (destination.parent?.id) {
+                    R.id.auth_nav -> {
+                        rootDl.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                        toolbar.visibility = View.GONE
+                        fab.visibility = View.GONE
+                        bottomNav.visibility = View.GONE
+                    }
+                    else -> {
+                        toolbar.visibility = View.VISIBLE
+                        when (destination.id) {
+                            R.id.fragment1, R.id.fragment2, R.id.fragment3, R.id.fragment4 -> {
+                                rootDl.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+                                fab.visibility = View.VISIBLE
+                                bottomNav.visibility = View.VISIBLE
+                            }
+                            else -> {
+                                rootDl.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                                fab.visibility = View.GONE
+                                bottomNav.visibility = View.GONE
+                            }
+                        }
+                    }
                 }
-            }
 
+            }
         }
     }
 
@@ -62,5 +87,4 @@ class MainActivity : AppCompatActivity() {
             super.onBackPressed()
         }
     }
-
 }

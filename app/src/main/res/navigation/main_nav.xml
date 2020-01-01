@@ -57,5 +57,79 @@
         android:id="@+id/fragment9"
         android:name="com.example.testapplication.Fragment9"
         android:label="Fragment 9"
-        tools:layout="@layout/fragment_9" /><action android:id="@+id/action_global_fragment9" app:destination="@id/fragment9"/>
+        tools:layout="@layout/fragment_9" />
+    <action
+        android:id="@+id/action_global_fragment9"
+        app:destination="@id/fragment9" />
+    <activity
+        android:id="@+id/onBoardingActivity"
+        android:name="com.example.testapplication.OnBoardingActivity"
+        android:label="activity_on_boarding"
+        tools:layout="@layout/activity_on_boarding" />
+    <navigation
+        android:id="@+id/auth_nav"
+        android:label="Auth"
+        app:startDestination="@id/loginFragment">
+        <fragment
+            android:id="@+id/signUpFragment"
+            android:name="com.example.testapplication.auth.SignUpFragment"
+            android:label="SignUpFragment"
+            tools:layout="@layout/sign_up_fragment">
+            <action
+                android:id="@+id/action_signUpFragment_to_activationFragment"
+                app:destination="@id/activationFragment"
+                app:popUpTo="@id/loginFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/activationFragment"
+            android:name="com.example.testapplication.auth.ActivationFragment"
+            android:label="ActivationFragment"
+            tools:layout="@layout/activation_fragment">
+            <action
+                android:id="@+id/action_activationFragment_to_fragment1"
+                app:destination="@id/fragment1"
+                app:popUpTo="@id/loginFragment"
+                app:popUpToInclusive="true" />
+        </fragment>
+        <fragment
+            android:id="@+id/createCompanyFragment"
+            android:name="com.example.testapplication.auth.CreateCompanyFragment"
+            android:label="CreateCompanyFragment"
+            tools:layout="@layout/create_company_fragment">
+            <action
+                android:id="@+id/action_createCompanyFragment_to_activationFragment"
+                app:destination="@id/activationFragment"
+                app:popUpTo="@id/loginFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/loginFragment"
+            android:name="com.example.testapplication.auth.LoginFragment"
+            android:label="LoginFragment"
+            tools:layout="@layout/login_fragment">
+            <action
+                android:id="@+id/action_loginFragment_to_signUpFragment"
+                app:destination="@id/signUpFragment" />
+            <action
+                android:id="@+id/action_loginFragment_to_createCompanyFragment"
+                app:destination="@id/createCompanyFragment" />
+            <action
+                android:id="@+id/action_loginFragment_to_activationFragment"
+                app:destination="@id/activationFragment" />
+            <action
+                android:id="@+id/action_loginFragment_to_main_nav"
+                app:destination="@id/main_nav"
+                app:popUpTo="@id/loginFragment"
+                app:popUpToInclusive="true" />
+        </fragment>
+    </navigation>
+    <action
+        android:id="@+id/action_global_auth_nav"
+        app:destination="@id/auth_nav"
+        app:popUpTo="@id/fragment1"
+        app:popUpToInclusive="true" />
+    <dialog
+        android:id="@+id/logoutFragment"
+        android:name="com.example.testapplication.LogoutFragment"
+        android:label="LogoutFragment"
+        tools:layout="@layout/logout_fragment" />
 </navigation>

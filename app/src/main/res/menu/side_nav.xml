@@ -25,4 +25,10 @@
         android:menuCategory="secondary"
         android:title="Eight" />
 
+    <item
+        android:id="@+id/logoutFragment"
+        android:icon="@drawable/ic_sign_out"
+        android:menuCategory="secondary"
+        android:title="logout" />
+
 </menu>

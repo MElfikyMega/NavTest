@@ -6,9 +6,9 @@
         android:title="One" />
 
     <item
-        android:id="@+id/fragment2"
+        android:id="@+id/inboxFragment"
         android:icon="@drawable/ic_two"
-        android:title="Two" />
+        android:title="Inbox" />
 
     <item
         android:enabled="false"

@@ -17,9 +17,9 @@
         tools:layout="@layout/fragment_1" />
     <fragment
         android:id="@+id/fragment2"
-        android:name="com.example.testapplication.Fragment2"
+        android:name="com.example.testapplication.inbox.InboxFragment"
         android:label="fragment_2"
-        tools:layout="@layout/fragment_2" >
+        tools:layout="@layout/inbox_fragment" >
         <argument
             android:name="test"
             app:argType="string" />

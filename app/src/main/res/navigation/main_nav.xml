@@ -19,10 +19,10 @@
             app:destination="@id/activity1" />
     </fragment>
     <fragment
-        android:id="@+id/fragment2"
-        android:name="com.example.testapplication.Fragment2"
-        android:label="Fragment Two"
-        tools:layout="@layout/fragment_2" />
+        android:id="@+id/inboxFragment"
+        android:name="com.example.testapplication.inbox.InboxFragment"
+        android:label="Inbox Fragment"
+        tools:layout="@layout/inbox_fragment" />
     <fragment
         android:id="@+id/fragment3"
         android:name="com.example.testapplication.Fragment3"
@@ -61,11 +61,6 @@
     <action
         android:id="@+id/action_global_fragment9"
         app:destination="@id/fragment9" />
-    <activity
-        android:id="@+id/onBoardingActivity"
-        android:name="com.example.testapplication.OnBoardingActivity"
-        android:label="activity_on_boarding"
-        tools:layout="@layout/activity_on_boarding" />
     <navigation
         android:id="@+id/auth_nav"
         android:label="Auth"
